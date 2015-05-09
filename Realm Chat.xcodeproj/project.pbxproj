@@ -7,13 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A209F06C1AFDE889003BEC27 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A209F06B1AFDE889003BEC27 /* Parse.framework */; };
+		A22E67331AFDC3080075DE37 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A22E67321AFDC3080075DE37 /* Reachability.m */; };
+		A26C315D1AFC6F8100D27059 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A26C315C1AFC6F8100D27059 /* ChatViewController.m */; };
+		A26C31611AFC6FEB00D27059 /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A26C315F1AFC6FEB00D27059 /* ChatCell.m */; };
 		A271E5211AFB4BD200106277 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A271E5201AFB4BD200106277 /* main.m */; };
 		A271E5241AFB4BD200106277 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A271E5231AFB4BD200106277 /* AppDelegate.m */; };
-		A271E5271AFB4BD200106277 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A271E5261AFB4BD200106277 /* ViewController.m */; };
+		A271E5271AFB4BD200106277 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A271E5261AFB4BD200106277 /* HomeViewController.m */; };
 		A271E52A1AFB4BD200106277 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A271E5281AFB4BD200106277 /* Main.storyboard */; };
 		A271E52C1AFB4BD200106277 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A271E52B1AFB4BD200106277 /* Images.xcassets */; };
 		A271E52F1AFB4BD200106277 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A271E52D1AFB4BD200106277 /* LaunchScreen.xib */; };
 		A271E53B1AFB4BD200106277 /* Realm_ChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A271E53A1AFB4BD200106277 /* Realm_ChatTests.m */; };
+		A2BC0B2C1AFB4FD50082ADF3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B2A1AFB4FD50082ADF3 /* Bolts.framework */; };
+		A2BC0B441AFB50C50082ADF3 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B421AFB507F0082ADF3 /* libsqlite3.dylib */; };
+		A2BC0B451AFB50C50082ADF3 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B401AFB50720082ADF3 /* libz.1.1.3.dylib */; };
+		A2BC0B461AFB50C50082ADF3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B3E1AFB50640082ADF3 /* SystemConfiguration.framework */; };
+		A2BC0B471AFB50C50082ADF3 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B3C1AFB50540082ADF3 /* StoreKit.framework */; };
+		A2BC0B481AFB50C50082ADF3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B3A1AFB504E0082ADF3 /* Security.framework */; };
+		A2BC0B491AFB50C50082ADF3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B381AFB50440082ADF3 /* QuartzCore.framework */; };
+		A2BC0B4A1AFB50C50082ADF3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B361AFB50390082ADF3 /* MobileCoreServices.framework */; };
+		A2BC0B4B1AFB50C50082ADF3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B341AFB502D0082ADF3 /* CoreLocation.framework */; };
+		A2BC0B4C1AFB50C50082ADF3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B321AFB50280082ADF3 /* CoreGraphics.framework */; };
+		A2BC0B4D1AFB50C50082ADF3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B301AFB50200082ADF3 /* CFNetwork.framework */; };
+		A2BC0B4E1AFB50C50082ADF3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2BC0B2E1AFB50140082ADF3 /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,19 +43,38 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A209F06B1AFDE889003BEC27 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		A22E67311AFDC3080075DE37 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		A22E67321AFDC3080075DE37 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		A26C315B1AFC6F8100D27059 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		A26C315C1AFC6F8100D27059 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		A26C315E1AFC6FEB00D27059 /* ChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
+		A26C315F1AFC6FEB00D27059 /* ChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		A271E51B1AFB4BD200106277 /* Realm Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Realm Chat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A271E51F1AFB4BD200106277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A271E5201AFB4BD200106277 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A271E5221AFB4BD200106277 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A271E5231AFB4BD200106277 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A271E5251AFB4BD200106277 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A271E5261AFB4BD200106277 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A271E5251AFB4BD200106277 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		A271E5261AFB4BD200106277 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		A271E5291AFB4BD200106277 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A271E52B1AFB4BD200106277 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A271E52E1AFB4BD200106277 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A271E5341AFB4BD200106277 /* Realm ChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Realm ChatTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A271E5391AFB4BD200106277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A271E53A1AFB4BD200106277 /* Realm_ChatTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Realm_ChatTests.m; sourceTree = "<group>"; };
+		A2BC0B2A1AFB4FD50082ADF3 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		A2BC0B2E1AFB50140082ADF3 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A2BC0B301AFB50200082ADF3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A2BC0B321AFB50280082ADF3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A2BC0B341AFB502D0082ADF3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A2BC0B361AFB50390082ADF3 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		A2BC0B381AFB50440082ADF3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A2BC0B3A1AFB504E0082ADF3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A2BC0B3C1AFB50540082ADF3 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		A2BC0B3E1AFB50640082ADF3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A2BC0B401AFB50720082ADF3 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		A2BC0B421AFB507F0082ADF3 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +82,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2BC0B441AFB50C50082ADF3 /* libsqlite3.dylib in Frameworks */,
+				A2BC0B451AFB50C50082ADF3 /* libz.1.1.3.dylib in Frameworks */,
+				A2BC0B461AFB50C50082ADF3 /* SystemConfiguration.framework in Frameworks */,
+				A2BC0B471AFB50C50082ADF3 /* StoreKit.framework in Frameworks */,
+				A2BC0B481AFB50C50082ADF3 /* Security.framework in Frameworks */,
+				A2BC0B491AFB50C50082ADF3 /* QuartzCore.framework in Frameworks */,
+				A209F06C1AFDE889003BEC27 /* Parse.framework in Frameworks */,
+				A2BC0B4A1AFB50C50082ADF3 /* MobileCoreServices.framework in Frameworks */,
+				A2BC0B4B1AFB50C50082ADF3 /* CoreLocation.framework in Frameworks */,
+				A2BC0B4C1AFB50C50082ADF3 /* CoreGraphics.framework in Frameworks */,
+				A2BC0B4D1AFB50C50082ADF3 /* CFNetwork.framework in Frameworks */,
+				A2BC0B4E1AFB50C50082ADF3 /* AudioToolbox.framework in Frameworks */,
+				A2BC0B2C1AFB4FD50082ADF3 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +108,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A26C31631AFC6FF600D27059 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				A22E67311AFDC3080075DE37 /* Reachability.h */,
+				A22E67321AFDC3080075DE37 /* Reachability.m */,
+				A26C315B1AFC6F8100D27059 /* ChatViewController.h */,
+				A26C315C1AFC6F8100D27059 /* ChatViewController.m */,
+				A26C315E1AFC6FEB00D27059 /* ChatCell.h */,
+				A26C315F1AFC6FEB00D27059 /* ChatCell.m */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
+		A26C31641AFC700400D27059 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A271E5251AFB4BD200106277 /* HomeViewController.h */,
+				A271E5261AFB4BD200106277 /* HomeViewController.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
 		A271E5121AFB4BD200106277 = {
 			isa = PBXGroup;
 			children = (
@@ -81,10 +151,11 @@
 		A271E51D1AFB4BD200106277 /* Realm Chat */ = {
 			isa = PBXGroup;
 			children = (
+				A2BC0B291AFB4FC10082ADF3 /* Parse */,
 				A271E5221AFB4BD200106277 /* AppDelegate.h */,
 				A271E5231AFB4BD200106277 /* AppDelegate.m */,
-				A271E5251AFB4BD200106277 /* ViewController.h */,
-				A271E5261AFB4BD200106277 /* ViewController.m */,
+				A26C31641AFC700400D27059 /* Home */,
+				A26C31631AFC6FF600D27059 /* Chat */,
 				A271E5281AFB4BD200106277 /* Main.storyboard */,
 				A271E52B1AFB4BD200106277 /* Images.xcassets */,
 				A271E52D1AFB4BD200106277 /* LaunchScreen.xib */,
@@ -117,6 +188,26 @@
 				A271E5391AFB4BD200106277 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A2BC0B291AFB4FC10082ADF3 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				A209F06B1AFDE889003BEC27 /* Parse.framework */,
+				A2BC0B421AFB507F0082ADF3 /* libsqlite3.dylib */,
+				A2BC0B401AFB50720082ADF3 /* libz.1.1.3.dylib */,
+				A2BC0B3E1AFB50640082ADF3 /* SystemConfiguration.framework */,
+				A2BC0B3C1AFB50540082ADF3 /* StoreKit.framework */,
+				A2BC0B3A1AFB504E0082ADF3 /* Security.framework */,
+				A2BC0B381AFB50440082ADF3 /* QuartzCore.framework */,
+				A2BC0B361AFB50390082ADF3 /* MobileCoreServices.framework */,
+				A2BC0B341AFB502D0082ADF3 /* CoreLocation.framework */,
+				A2BC0B321AFB50280082ADF3 /* CoreGraphics.framework */,
+				A2BC0B301AFB50200082ADF3 /* CFNetwork.framework */,
+				A2BC0B2E1AFB50140082ADF3 /* AudioToolbox.framework */,
+				A2BC0B2A1AFB4FD50082ADF3 /* Bolts.framework */,
+			);
+			name = Parse;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,8 +311,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A271E5271AFB4BD200106277 /* ViewController.m in Sources */,
+				A271E5271AFB4BD200106277 /* HomeViewController.m in Sources */,
 				A271E5241AFB4BD200106277 /* AppDelegate.m in Sources */,
+				A26C315D1AFC6F8100D27059 /* ChatViewController.m in Sources */,
+				A26C31611AFC6FEB00D27059 /* ChatCell.m in Sources */,
+				A22E67331AFDC3080075DE37 /* Reachability.m in Sources */,
 				A271E5211AFB4BD200106277 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +443,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Realm",
+					Chat,
+					"$(PROJECT_DIR)/Realm",
+					Chat,
+					"$(PROJECT_DIR)/Realm",
+					Chat,
+					"$(PROJECT_DIR)/Realm",
+					Chat,
+				);
 				INFOPLIST_FILE = "Realm Chat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -361,6 +466,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Realm",
+					Chat,
+					"$(PROJECT_DIR)/Realm",
+					Chat,
+					"$(PROJECT_DIR)/Realm",
+					Chat,
+					"$(PROJECT_DIR)/Realm",
+					Chat,
+				);
 				INFOPLIST_FILE = "Realm Chat/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -421,6 +537,7 @@
 				A271E5401AFB4BD200106277 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A271E5411AFB4BD200106277 /* Build configuration list for PBXNativeTarget "Realm ChatTests" */ = {
 			isa = XCConfigurationList;
@@ -429,6 +546,7 @@
 				A271E5431AFB4BD200106277 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
