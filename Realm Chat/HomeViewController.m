@@ -23,8 +23,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    _userName = [defaults stringForKey:@"Username"];
+
+    _userName = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserName"];
     if (_userName) {
         // show button for login
         _loginBTN.hidden=NO;
@@ -45,12 +45,21 @@
         self.userName=[alertView textFieldAtIndex:0].text;
         [[NSUserDefaults standardUserDefaults] setObject:self.userName forKey:@"UserName"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        [self performSegueWithIdentifier:@"enterChatroom" sender:self];
     }
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    ChatViewController *chatVC = (ChatViewController*)[segue destinationViewController];
-    chatVC.userName=_userName;
+- (IBAction)tappedLoginChatRoom:(id)sender {
+    [self performSegueWithIdentifier:@"enterChatroom" sender:self];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"enterChatroom"]) {
+        ChatViewController *destinationVC = (ChatViewController*)segue.destinationViewController;
+        destinationVC.userName=_userName;
+    }
 }
 
 @end

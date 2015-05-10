@@ -19,9 +19,9 @@
 
 @property (weak,nonatomic) IBOutlet UITextField * messageTextField;
 @property (weak,nonatomic) IBOutlet UITableView * messagesTable;
+@property (retain,nonatomic) UIRefreshControl *refreshControl;
 
 @property (nonatomic, retain) NSMutableArray *chatData;
-
 
 @end
 
@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-# pragma mark - Register For Keyboard Notification
+#pragma mark - Register For Keyboard Notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
@@ -37,15 +37,41 @@
     _messageTextField.delegate = self;
     _messageTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
+    
+    UIView *refreshView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 55)];
+    [self.messagesTable insertSubview:refreshView atIndex:0]; //the tableView is a IBOutlet
+    
+    _refreshControl = [[UIRefreshControl alloc] init];
+    _refreshControl.tintColor = [UIColor redColor];
+    [_refreshControl addTarget:self action:@selector(reloadMessagesTable) forControlEvents:UIControlEventValueChanged];
+     NSMutableAttributedString *refreshString = [[NSMutableAttributedString alloc] initWithString:@"Pull To Refresh"];
+     [refreshString addAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]} range:NSMakeRange(0, refreshString.length)];
+     _refreshControl.attributedTitle = refreshString;
+    [refreshView addSubview:_refreshControl];
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    Reachability *reach = [Reachability reachabilityForInternetConnection];
+    NetworkStatus status = [reach currentReachabilityStatus];
+    if (status == NotReachable){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network"
+                                                        message:[self stringFromStatus: status]
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    
+    _chatData  = [NSMutableArray array];
+    [self loadLocalChat];
+    
+}
 
 #pragma mark - Message Textfield Handling
 
 -(IBAction) textFieldDoneEditing : (id) sender
 {
-
     [sender resignFirstResponder];
     [self.messageTextField resignFirstResponder];
 }
@@ -59,33 +85,10 @@
 {
     [textField resignFirstResponder];
     
-    if (_messageTextField.text.length>0) {
-        // updating the table immediately
-        NSArray *keys = [NSArray arrayWithObjects:@"text", @"userName", @"date", nil];
-        NSArray *objects = [NSArray arrayWithObjects:_messageTextField.text, _userName, [NSDate date], nil];
-        NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
-        [_chatData addObject:dictionary];
-        
-        NSMutableArray *insertIndexPaths = [[NSMutableArray alloc] init];
-        NSIndexPath *newPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [insertIndexPaths addObject:newPath];
-        [_messagesTable beginUpdates];
-        [_messagesTable insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
-        [_messagesTable endUpdates];
-        [_messagesTable reloadData];
-        
-        // going for the parsing
-        PFObject *newMessage = [PFObject objectWithClassName:@"message"];
-        [newMessage setObject:_messageTextField.text forKey:@"text"];
-        [newMessage setObject:_userName forKey:@"userName"];
-        [newMessage setObject:[NSDate date] forKey:@"date"];
-        [newMessage saveInBackground];
-        _messageTextField.text = @"";
-    }
+    [self sendMessage:nil];
     
     // reload the data
     [self loadLocalChat];
-    return NO;
     return NO;
 }
 
@@ -96,28 +99,14 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    Reachability *reach = [Reachability reachabilityForInternetConnection];
-    NetworkStatus status = [reach currentReachabilityStatus];
-    if (status == NotReachable){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Network"
-                                                        message:[self stringFromStatus: status]
-                                                       delegate:self
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    }else{
-        
-        _chatData  = [NSMutableArray array];
-        [self loadLocalChat];
-    }
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Keyboard Handling
 -(void) keyboardWasShown:(NSNotification*)aNotification
 {
     
@@ -133,7 +122,7 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
-    [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y- keyboardFrame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height- keyboardFrame.size.height)];
     
     [UIView commitAnimations];
     
@@ -154,7 +143,7 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:animationDuration];
     [UIView setAnimationCurve:animationCurve];
-    [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + keyboardFrame.size.height, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view setFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height+ keyboardFrame.size.height)];
     
     [UIView commitAnimations];
 }
@@ -163,12 +152,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.chatData.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
-    return 1;
+    return self.chatData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
@@ -183,11 +172,11 @@
     
     if (row < _chatData.count){
         // Message Text
+
         NSString *chatText = [[_chatData objectAtIndex:row] objectForKey:@"text"];
+        
         cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         UIFont *font = [UIFont systemFontOfSize:14];
-//        CGSize size = [chatText sizeWithFont:font constrainedToSize:CGSizeMake(225.0f, 1000.0f) lineBreakMode:NSLineBreakByWordWrapping];
-
         NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
         paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
         CGSize size =[chatText boundingRectWithSize:CGSizeMake(225.0f, 1000.0f)
@@ -196,10 +185,12 @@
                                            NSParagraphStyleAttributeName:paragraphStyle}
                                  context:nil].size;
         
-        cell.textString.frame = CGRectMake(75, 14, size.width +20, size.height + 20);
+        cell.textString.frame = CGRectMake(cell.textString.frame.origin.x, cell.textString.frame.origin.y, size.width +20, size.height + 20);
         cell.textString.font = [UIFont fontWithName:@"Helvetica" size:14.0];
         cell.textString.text = chatText;
         [cell.textString sizeToFit];
+            
+        
         // Message Date
         NSDate *theDate = [[_chatData objectAtIndex:row] objectForKey:@"date"];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -215,27 +206,22 @@
     return cell;
 }
 
-- (void)reloadTableViewDataSource{
+- (void)reloadMessagesTable{
     
-    //  should be calling your tableviews data source model to reload
-    //  put here just for demo
-//    _reloading = YES;
     [self loadLocalChat];
     [_messagesTable reloadData];
+    [_refreshControl endRefreshing];
 }
 
 #pragma mark - Tableview Delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
-{
-    
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellText = [[self.chatData objectAtIndex:self.chatData.count-indexPath.row-1] objectForKey:@"text"];
+    CGFloat cellHeight=80.0;
+    
+    NSString *cellText = [[_chatData objectAtIndex:_chatData.count-indexPath.row-1] objectForKey:@"text"];
     UIFont *cellFont = [UIFont fontWithName:@"Helvetica" size:14.0];
-    CGSize constraintSize = CGSizeMake(225.0f, MAXFLOAT);
+    CGSize constraintSize = CGSizeMake(250.0f, MAXFLOAT);
     
     NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
@@ -244,21 +230,18 @@
                                      attributes:@{NSFontAttributeName: cellFont,
                                                   NSParagraphStyleAttributeName:paragraphStyle}
                                         context:nil].size;
+        cellHeight=labelSize.height+40;
     
-//    CGSize labelSize = [cellText sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:NSLineBreakByWordWrapping];
     
-    return labelSize.height + 40;
+    return cellHeight;
 }
 
 #pragma mark - Parse
 
 - (void)loadLocalChat
 {
-    PFQuery *query = [PFQuery queryWithClassName: @"message"];
+    PFQuery *query = [PFQuery queryWithClassName: @"Message"];
     
-    
-    // If no objects are loaded in memory, we look to the cache first to fill the table
-    // and then subsequently do a query against the network.
     if (_chatData.count == 0) {
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
         [query orderByAscending:@"createdAt"];
@@ -267,7 +250,6 @@
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 // The find succeeded.
-
                 [_chatData removeAllObjects];
                 [_chatData addObjectsFromArray:objects];
                 [_messagesTable reloadData];
@@ -276,53 +258,7 @@
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
             }
         }];
-    }
-    __block int totalNumberOfEntries = 0;
-    [query orderByAscending:@"createdAt"];
-    [query countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
-        if (!error) {
-            // The count request succeeded.
-            NSLog(@"There are currently %d entries", number);
-            
-            totalNumberOfEntries = number;
-            if (totalNumberOfEntries > _chatData.count) {
-                
-                // Retrieving data
-                int theLimit;
-                if (totalNumberOfEntries-_chatData.count>MAX_ENTRIES_LOADED) {
-                    theLimit = MAX_ENTRIES_LOADED;
-                }
-                else {
-                    theLimit = totalNumberOfEntries-_chatData.count;
-                }
-                query.limit = [NSNumber numberWithInt:theLimit].integerValue;
-                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                    if (!error) {
-                        // The find succeeded.
-
-                        [_chatData addObjectsFromArray:objects];
-                        NSMutableArray *insertIndexPaths = [NSMutableArray array];
-                        for (int ind = 0; ind < objects.count; ind++) {
-                            NSIndexPath *newPath = [NSIndexPath indexPathForRow:ind inSection:0];
-                            [insertIndexPaths addObject:newPath];
-                        }
-                        [_messagesTable beginUpdates];
-                        [_messagesTable insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
-                        [_messagesTable endUpdates];
-                        [_messagesTable reloadData];
-                        [_messagesTable scrollsToTop];
-                    } else {
-                        // Log details of the failure
-                        NSLog(@"Error: %@ %@", error, [error userInfo]);
-                    }
-                }];
-            }
-            
-        } else {
-            // The request failed, we'll keep the chatData count?
-            number = _chatData.count;
-        }
-    }];
+    }   
 }
 
 - (NSString *)stringFromStatus:(NetworkStatus ) status {
@@ -342,6 +278,39 @@
     }
     return string;
 }
+#pragma mark - Send Message
+
+-(IBAction)sendMessage:(id)sender{
+
+    if (_messageTextField.text.length>0) {
+      
+        NSArray *keys = @[@"text", @"userName", @"date"];
+        NSArray *objects = @[_messageTextField.text, _userName, [NSDate date]];
+        NSDictionary *dictionary = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+        [_chatData addObject:dictionary];
+        
+        NSMutableArray *insertIndexPaths = [[NSMutableArray alloc] init];
+        NSIndexPath *newPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [insertIndexPaths addObject:newPath];
+        [_messagesTable beginUpdates];
+        [_messagesTable insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
+        [_messagesTable endUpdates];
+        [_messagesTable reloadData];
+        
+        // going for the parsing
+        PFObject *newMessage = [PFObject objectWithClassName:@"Message"];
+        [newMessage setObject:_messageTextField.text forKey:@"text"];
+        [newMessage setObject:_userName forKey:@"userName"];
+        [newMessage setObject:[NSDate date] forKey:@"date"];
+        [newMessage saveInBackground];
+        _messageTextField.text = @"";
+    }
+
+}
+
+
+
+
 
 /*
 #pragma mark - Navigation
